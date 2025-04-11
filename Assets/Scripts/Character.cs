@@ -37,18 +37,24 @@ public class Character : MonoBehaviour
         SetPositionValues();
 
         //Saca al personaje de pantalla para meterlo
-        transform.position = new Vector3(_offScreenX, transform.position.y, transform.localPosition.z);
+        //transform.position = new Vector3(_offScreenX, transform.position.y, transform.localPosition.z);
 
         //Comprueba que el sprite está actualizado
         UpdateSprite();
 
-        //Mover el personaje a su sitio (shhhh)
-        LeanTween.moveX(gameObject, _onScreenX, _animationSpeed).setEase(LeanTweenType.linear).setOnComplete(() => { IsShowing = true; });
+        //Mover el personaje a su sitio
+        transform.position = new Vector3(_onScreenX, transform.position.y, transform.localPosition.z);
+        IsShowing = true;
+
+        //LeanTween.moveX(gameObject, _onScreenX, _animationSpeed).setEase(LeanTweenType.linear).setOnComplete(() => { IsShowing = true; });
     }
 
     public void Hide()
     {
-        LeanTween.moveX(gameObject, _offScreenX, _animationSpeed).setEase(LeanTweenType.linear).setOnComplete(() => { IsShowing = false; });
+        transform.position = new Vector3(_offScreenX, transform.position.y, transform.localPosition.z);
+        IsShowing = false;
+
+        //LeanTween.moveX(gameObject, _offScreenX, _animationSpeed).setEase(LeanTweenType.linear).setOnComplete(() => { IsShowing = false; });
     }
 
     private void SetPositionValues()
@@ -56,7 +62,7 @@ public class Character : MonoBehaviour
         switch (Position)
         {
             case CharacterPosition.Left: 
-                _onScreenX = Screen.width * 0.25f;
+                _onScreenX = Screen.width * 0.10f;
                 _offScreenX = -Screen.width * 0.25f;
                 break;
             case CharacterPosition.Center:
@@ -64,7 +70,7 @@ public class Character : MonoBehaviour
                 _offScreenX = -Screen.width * 0.25f;
                 break;
             case CharacterPosition.Right:
-                _onScreenX = Screen.width * 0.75f;
+                _onScreenX = Screen.width * 0.90f;
                 _offScreenX = Screen.width * 1.25f;
                 break;
         }

@@ -26,9 +26,12 @@ public class InkManager : MonoBehaviour
     private Color _normalTextColor;
 
     [SerializeField]
-    private Color _thoughtTextColor;
+    private Color _narratorTextColor;
 
     private CharacterManager _characterManager;
+
+    public GameObject TavernBackground;
+    public GameObject OutsideBackground;
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +52,24 @@ public class InkManager : MonoBehaviour
 
         _story.BindExternalFunction("ChangeMood", (string name, string mood) => _characterManager.ChangeMood(name, mood));
 
+        _story.BindExternalFunction("ChangeScene", (string name) => ChangeScene(name));
+
         DisplayNextLine();
+    }
+
+    private void ChangeScene(string sceneName)
+    {
+        switch (sceneName)
+        {
+            case "Tavern":
+                TavernBackground.SetActive(true);
+                OutsideBackground.SetActive(false);
+                break;
+            case "Outside":
+                OutsideBackground.SetActive(true);
+                TavernBackground.SetActive(false);
+                break;
+        }
     }
 
     //Muestra la siguiente linea de la historia
@@ -65,7 +85,6 @@ public class InkManager : MonoBehaviour
         {
             DisplayChoices();
         }
-
         
     }
 
@@ -117,14 +136,17 @@ public class InkManager : MonoBehaviour
     //Aplica estilos en base a los tags de la linea
     private void ApplyStyling()
     {
-        if (_story.currentTags.Contains("pensamiento"))
+        if (_story.currentTags.Contains("narrador"))
         {
-            _textField.color = _thoughtTextColor;
-            //_textField.fontStyle = TMP_Style.; <- SE PONE EN CURSIVA
+            _textField.color = _narratorTextColor;
+        } else if (_story.currentTags.Contains("credit"))
+        {
+            _textField.text = "<b>" + _textField.text;
+            _textField.alignment = TextAlignmentOptions.Center;
+            _textField.verticalAlignment = VerticalAlignmentOptions.Middle;
         } else
         {
             _textField.color = _normalTextColor;
-            //Estilo normal
         }
     }
 }

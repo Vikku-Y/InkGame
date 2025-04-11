@@ -14,6 +14,12 @@ public class CharacterManager : MonoBehaviour
 
     [SerializeField]
     private CharacterMoods _amogusMoods;
+    [SerializeField]
+    private CharacterMoods _sanariMoods;
+    [SerializeField]
+    private CharacterMoods _eliraMoods;
+    [SerializeField]
+    private CharacterMoods _kaneMoods;
 
     // Start is called before the first frame update
     void Awake()
@@ -127,6 +133,12 @@ public class CharacterManager : MonoBehaviour
         {
             case CharacterName.Amogus:
                 return _amogusMoods;
+            case CharacterName.Sanari:
+                return _sanariMoods;
+            case CharacterName.Elira:
+                return _eliraMoods;
+            case CharacterName.Kane:
+                return _kaneMoods;
             default:
                 Debug.LogError($"No se encontró el moodset de {name}");
                 return null;

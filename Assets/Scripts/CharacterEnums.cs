@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts
 {
-    public enum CharacterName { Amogus, Yo};
+    public enum CharacterName { Amogus, Sanari, Kane, Elira};
 
     public enum CharacterPosition { Center, Left, Right};
 
-    public enum CharacterMood { Neutral, Victory, Pensive};
+    public enum CharacterMood { Normal, Angry, Sigh, Happy};
 }

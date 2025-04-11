@@ -6,22 +6,25 @@ using Assets.Scripts;
 public class CharacterMoods : MonoBehaviour
 {
     public CharacterName Name;
-    public Sprite Neutral;
-    public Sprite Victory;
-    public Sprite Pensive;
+    public Sprite Normal;
+    public Sprite Angry;
+    public Sprite Sigh;
+    public Sprite Happy;
 
     public Sprite GetMoodSprite(CharacterMood mood)
     {
         switch (mood) { 
-            case CharacterMood.Neutral:
-                return Neutral;
-            case CharacterMood.Victory:
-                return Victory ?? Neutral;
-            case CharacterMood.Pensive:
-                return Pensive ?? Neutral;
+            case CharacterMood.Normal:
+                return Normal;
+            case CharacterMood.Angry:
+                return Angry ?? Normal;
+            case CharacterMood.Sigh:
+                return Sigh ?? Normal;
+            case CharacterMood.Happy:
+                return Happy ?? Normal;
             default:
                 Debug.Log($"No se encontró el sprite {mood} del personaje {Name}");
-                return Neutral;
+                return Normal;
         }
     }
 }
