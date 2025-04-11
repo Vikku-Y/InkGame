@@ -90,9 +90,11 @@ public class InkManager : MonoBehaviour
         {
             case "Regular":
                 GetComponentInChildren<AudioSource>().clip = RegularMusic;
+                GetComponentInChildren<AudioSource>().Play();
                 break;
             case "Tension":
                 GetComponentInChildren<AudioSource>().clip = TensionMusic;
+                GetComponentInChildren<AudioSource>().Play();
                 break;
         }
     }

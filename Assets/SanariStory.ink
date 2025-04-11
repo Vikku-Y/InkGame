@@ -3,6 +3,8 @@ EXTERNAL ShowCharacter(name, position, mood)
 EXTERNAL HideCharacter(name)
 EXTERNAL ChangeMood(name, mood)
 EXTERNAL ChangeScene(name)
+EXTERNAL ChangeMusic(name)
+
 -> Intro
 == Intro ==
 
@@ -43,11 +45,12 @@ Evidentemente, Kane vuelve a ganar el juego, tomando la llave y el dinero del ap
 [Kane]: Un placer hacer negocios, caballero.
 ~ HideCharacter("Kane")
 [Señor Desesperado]: ¡Te arrepentiras de esto! Mierda, que le voy a decir ahora a mi mujer...
+~ ChangeMusic("Tension")
 El hombre sale derrotado y frustrado de la taberna, momento que la chiquilla intenta aprovechar para arrancarle la bolsa de dinero de las manos. #narrador
 ~ ShowCharacter("Sanari", "Left", "Angry")
 [Chica Bajita]: ...
 ~ HideCharacter("Sanari")
-Esta mujer es Sanari, una mujer de extraño pero trágico origen que viaja por el mundo intentando encontrar un sitio en la vida y ayudando a los indefensos, aunque es un poco carente de luces. 
+Esta mujer es Sanari, una mujer de extraño pero trágico origen que viaja por el mundo intentando encontrar un sitio en la vida y ayudando a los indefensos, aunque es un poco carente de luces. #narrador
 ~ ShowCharacter("Kane", "Left", "Sigh")
 [Kane]: ...
 ~ HideCharacter("Kane")
@@ -73,6 +76,7 @@ Sanari y Kane se enzarzan en una caldeada conversación, y tras un rato irrumpe 
 
 == Emergencia ==
 
+~ ChangeMusic("Regular")
 ~ ShowCharacter("Elira", "Left", "Angry")
 [Elira]: ¿Vosotros dos podeis cerrar el pico? El tabernero me ha pedido que intente calmar la situación...
 ~ HideCharacter("Elira")
@@ -92,7 +96,7 @@ Elira, una joven delicada y de piel blanca, es cauta y desconfiada a la par que 
 [Kane]: Heh, ¿te interesa? Estoy dispuesto a apostarmela si-
 ~ HideCharacter("Kane")
 En mitad de la conversación irrumpe un chiquillo joven en la taberna y se acerca al grupo de tres. #narrador
-[Niño]: Disculpad, ¿sois aventureros? Estaba jugando al escondite con mis amigos pero nuestra amiga lleva varias horas desaparecida, creo que ha entrado en la mansión abandonada...
+[Niño]: Disculpad, ¿sois aventureros? Estaba jugando al escondite con mis amigos pero nuestra amiga lleva varias horas desaparecida, creo que ha entrado en la mansión abandonada... 
 ~ ShowCharacter("Kane", "Left", "Normal")
 [Kane]: No tenemos tiempo para eso crio-
 ~ HideCharacter("Kane")
