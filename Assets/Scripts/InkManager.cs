@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts;
+using UnityEngine.Audio;
 
 public class InkManager : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class InkManager : MonoBehaviour
 
     [SerializeField]
     private TMP_Text _textField;
+
+    [SerializeField]
+    private AudioMixer audioMixer;
 
     [SerializeField]
     private VerticalLayoutGroup _choiceButtonsContainer;
@@ -33,11 +37,18 @@ public class InkManager : MonoBehaviour
     public GameObject TavernBackground;
     public GameObject OutsideBackground;
 
+    public AudioClip RegularMusic;
+    public AudioClip TensionMusic;
+
     // Start is called before the first frame update
     void Start()
     {
         _characterManager = FindObjectOfType<CharacterManager>();
         StartStory();
+
+        audioMixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume", 0.8f)) * 20);
+
+        gameObject.GetComponentInChildren<AudioSource>().playOnAwake = false;
     }
 
     //Inicializa la historia
@@ -54,6 +65,8 @@ public class InkManager : MonoBehaviour
 
         _story.BindExternalFunction("ChangeScene", (string name) => ChangeScene(name));
 
+        _story.BindExternalFunction("ChangeMusic", (string name) => ChangeMusic(name));
+
         DisplayNextLine();
     }
 
@@ -68,6 +81,18 @@ public class InkManager : MonoBehaviour
             case "Outside":
                 OutsideBackground.SetActive(true);
                 TavernBackground.SetActive(false);
+                break;
+        }
+    }
+    private void ChangeMusic(string musicName)
+    {
+        switch (musicName)
+        {
+            case "Regular":
+                GetComponentInChildren<AudioSource>().clip = RegularMusic;
+                break;
+            case "Tension":
+                GetComponentInChildren<AudioSource>().clip = TensionMusic;
                 break;
         }
     }
@@ -148,5 +173,10 @@ public class InkManager : MonoBehaviour
         {
             _textField.color = _normalTextColor;
         }
+    }
+    public void changeMasterVolume(float sliderValue)
+    {
+        audioMixer.SetFloat("MasterVolume", Mathf.Log10(sliderValue) * 20);
+        PlayerPrefs.SetFloat("MasterVolume", sliderValue);
     }
 }
